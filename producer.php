@@ -10,14 +10,20 @@ $channel = $connection->channel();
 
 $exchange = 'topic_exchange';
 $channel->exchange_declare($exchange, 'topic', false, false, false);
-
-$messageBody = 'New user registration';
-$message = new AMQPMessage($messageBody);
-
 $routingKey = 'europe.new.users';
-$channel->basic_publish($message, $exchange, $routingKey);
 
-echo "Message sent with body: \"$messageBody\" to exchange \"$exchange\" using routing key \"$routingKey\".\n";
+$c = 1;
+
+while (true)
+{
+    $messageBody = "New user registration number ".$c;
+    $message = new AMQPMessage($messageBody);
+
+    $channel->basic_publish($message, $exchange, $routingKey);
+    echo "Message sent with body: \"$messageBody\" to exchange \"$exchange\" using routing key \"$routingKey\".\n";
+    $c++;
+    sleep(1);
+}
 
 $channel->close();
 $connection->close();

@@ -16,7 +16,7 @@ $channel = $connection->channel();
 $exchange = 'topic_exchange';
 $channel->exchange_declare($exchange, 'topic', false, false, false);
 
-[$queueName,,,] = $queue = $channel->queue_declare('', false, false, false, true, false);
+[$queueName,,,] = $channel->queue_declare('', false, false, false, true, false);
 
 $channel->queue_bind($queueName, $exchange, 'europe.#');
 
