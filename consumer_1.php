@@ -5,8 +5,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$on_recieved = function($msg)
-{
+$on_recieved = function ($msg) {
     echo "Europe service recieved message: \"$msg->body\"\n";
 };
 
